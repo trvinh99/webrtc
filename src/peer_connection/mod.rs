@@ -1312,7 +1312,7 @@ impl RTCPeerConnection {
                                     find_by_mid(mid_value, &mut local_transceivers).await
                                 {
                                     if direction == RTCRtpTransceiverDirection::Inactive {
-                                        t.stop().await?;
+                                        t.make_inactive().await?;
                                     }
                                     Some(t)
                                 } else {
@@ -1333,6 +1333,15 @@ impl RTCPeerConnection {
                                         && t.direction() == RTCRtpTransceiverDirection::Sendonly
                                     {
                                         t.set_direction(RTCRtpTransceiverDirection::Sendrecv);
+                                    } else if t.direction() == RTCRtpTransceiverDirection::Inactive
+                                    {
+                                        use crate::rtp_transceiver::rtp_transceiver_direction::RTCRtpTransceiverDirection::*;
+                                        match direction {
+                                            Sendrecv => t.set_direction(Sendrecv),
+                                            Recvonly => t.set_direction(Sendonly),
+                                            Sendonly => t.set_direction(Recvonly),
+                                            _ => {}
+                                        }
                                     }
 
                                     if t.mid().await.is_empty() {

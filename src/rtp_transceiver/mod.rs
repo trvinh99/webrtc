@@ -313,6 +313,18 @@ impl RTCRtpTransceiver {
         self.direction.store(d as u8, Ordering::SeqCst);
     }
 
+    pub async fn make_inactive(&self) -> Result<()> {
+        if self.stopped.load(Ordering::SeqCst) {
+            return Ok(());
+        }
+
+        // TODO: Set the receiver and sender as paused here
+
+        self.set_direction(RTCRtpTransceiverDirection::Inactive);
+
+        Ok(())
+    }
+
     /// stop irreversibly stops the RTPTransceiver
     pub async fn stop(&self) -> Result<()> {
         if self.stopped.load(Ordering::SeqCst) {
