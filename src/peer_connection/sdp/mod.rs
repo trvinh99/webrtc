@@ -362,6 +362,8 @@ pub(crate) async fn populate_local_candidates(
             Err(_) => return Some(sd.clone()),
         };
 
+        println!("candidatesss: {:?}", candidates);
+
         let mut parsed = match sd.unmarshal() {
             Ok(parsed) => parsed,
             Err(_) => return Some(sd.clone()),

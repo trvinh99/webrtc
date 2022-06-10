@@ -26,7 +26,7 @@ use crate::dtls_transport::dtls_role::{
 use crate::dtls_transport::dtls_transport_state::RTCDtlsTransportState;
 use crate::dtls_transport::RTCDtlsTransport;
 use crate::error::{flatten_errs, Error, Result};
-use crate::ice_transport::ice_candidate::{RTCIceCandidate, RTCIceCandidateInit};
+use crate::ice_transport::ice_candidate::{RTCIceCandidate, RTCIceCandidateInit, rtc_ice_candidates_from_ice_candidates};
 use crate::ice_transport::ice_connection_state::RTCIceConnectionState;
 use crate::ice_transport::ice_gatherer::RTCIceGatherOptions;
 use crate::ice_transport::ice_gatherer::{
@@ -2112,6 +2112,7 @@ impl RTCPeerConnection {
                     let mut d = done3.lock().await;
 
                     d.take();
+                    println!("d: {:?}", d);
                 })
             }))
             .await;
@@ -2120,7 +2121,6 @@ impl RTCPeerConnection {
             log::trace!("ICEGatheringState::Complete");
             let mut d = done.lock().await;
             d.take();
-            println!("d: {:?}", d);
         }
 
         gathering_complete_rx
