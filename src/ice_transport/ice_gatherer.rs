@@ -174,8 +174,6 @@ impl RTCIceGatherer {
             agent
                 .on_candidate(Box::new(
                     move |candidate: Option<Arc<dyn Candidate + Send + Sync>>| {
-
-                        println!("candidate: {:?}", candidate.as_ref().unwrap().to_string());
                         let state_clone = Arc::clone(&state);
                         let on_local_candidate_handler_clone =
                             Arc::clone(&on_local_candidate_handler);

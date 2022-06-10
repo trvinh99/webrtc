@@ -1207,6 +1207,7 @@ impl RTCPeerConnection {
                 }
                 RTCSdpType::Offer => {
                     let last_offer = self.internal.last_offer.lock().await;
+                    println!("last_offer: {:?}", last_offer);
                     desc.sdp = last_offer.clone();
                 }
                 _ => return Err(Error::ErrPeerConnSDPTypeInvalidValueSetLocalDescription),
