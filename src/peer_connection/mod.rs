@@ -1203,6 +1203,7 @@ impl RTCPeerConnection {
             match desc.sdp_type {
                 RTCSdpType::Answer | RTCSdpType::Pranswer => {
                     let last_answer = self.internal.last_answer.lock().await;
+                    println!("last_answer: {:?}", last_answer);
                     desc.sdp = last_answer.clone();
                 }
                 RTCSdpType::Offer => {
