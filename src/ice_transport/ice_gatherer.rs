@@ -267,6 +267,8 @@ impl RTCIceGatherer {
             return Err(Error::ErrICEAgentNotExist);
         };
 
+        println!("ice_candidates: {:?}", rtc_ice_candidates_from_ice_candidates(&ice_candidates));
+
         Ok(rtc_ice_candidates_from_ice_candidates(&ice_candidates))
     }
 
