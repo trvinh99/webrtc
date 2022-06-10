@@ -107,6 +107,10 @@ impl PeerConnectionInternal {
             ice_gather_policy: configuration.ice_transport_policy,
         })?);
 
+        println!("ice servers: {:?}", configuration.get_ice_servers());
+        println!("ice_transport_policy: {:?}", configuration.ice_transport_policy);
+
+
         // Create the ice transport
         pc.ice_transport = pc.create_ice_transport(api).await;
 
