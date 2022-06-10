@@ -86,11 +86,13 @@ impl RTCIceGatherer {
             }
         }
 
+        println!("gather_policy: {:?}", self.gather_policy);
+        println!("candidates: {:?}", self.setting_engine.candidates.nat_1to1_ip_candidate_type);
+
         let mut candidate_types = vec![];
         if self.setting_engine.candidates.ice_lite {
             candidate_types.push(ice::candidate::CandidateType::Host);
         } else if self.gather_policy == RTCIceTransportPolicy::Relay {
-            println!("gather_policy: {:?}", self.gather_policy);
             candidate_types.push(ice::candidate::CandidateType::Relay);
         }
 
