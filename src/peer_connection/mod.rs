@@ -1188,6 +1188,7 @@ impl RTCPeerConnection {
 
     /// set_local_description sets the SessionDescription of the local peer
     pub async fn set_local_description(&self, mut desc: RTCSessionDescription) -> Result<()> {
+        println!("set_local_description");
         if self.internal.is_closed.load(Ordering::SeqCst) {
             return Err(Error::ErrConnectionClosed);
         }
