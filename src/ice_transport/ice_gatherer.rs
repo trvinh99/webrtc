@@ -97,6 +97,8 @@ impl RTCIceGatherer {
             candidate_types.push(ice::candidate::CandidateType::Relay);
         }
 
+        println!("candidate_types: {:?}", candidate_types);
+
         let nat_1to1_cand_type = match self.setting_engine.candidates.nat_1to1_ip_candidate_type {
             RTCIceCandidateType::Host => CandidateType::Host,
             RTCIceCandidateType::Srflx => CandidateType::ServerReflexive,
