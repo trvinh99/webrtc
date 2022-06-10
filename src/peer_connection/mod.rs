@@ -2110,6 +2110,7 @@ impl RTCPeerConnection {
                 let done3 = Arc::clone(&done2);
                 Box::pin(async move {
                     let mut d = done3.lock().await;
+
                     d.take();
                 })
             }))
@@ -2119,6 +2120,7 @@ impl RTCPeerConnection {
             log::trace!("ICEGatheringState::Complete");
             let mut d = done.lock().await;
             d.take();
+            println!("d: {:?}", d);
         }
 
         gathering_complete_rx

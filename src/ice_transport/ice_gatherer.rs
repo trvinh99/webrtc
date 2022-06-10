@@ -86,6 +86,7 @@ impl RTCIceGatherer {
             }
         }
 
+        println!("setting_engine.candidates.ice_lite: {:?}", self.setting_engine.candidates.ice_lite);
         println!("gather_policy: {:?}", self.gather_policy);
         println!("candidates: {:?}", self.setting_engine.candidates.nat_1to1_ip_candidate_type);
 
