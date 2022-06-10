@@ -65,6 +65,7 @@ impl From<&Arc<dyn Candidate + Send + Sync>> for RTCIceCandidate {
 impl RTCIceCandidate {
     pub(crate) async fn to_ice(&self) -> Result<impl Candidate> {
         let candidate_id = self.stats_id.clone();
+        println!("Candidate type: {:?}", self.typ);
         let c = match self.typ {
             RTCIceCandidateType::Host => {
                 let config = CandidateHostConfig {
